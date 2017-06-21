@@ -235,7 +235,7 @@ class LogStash::Inputs::Cloudflare < LogStash::Inputs::Base
       # in the case of cache.cacheStatus ... if cacheStatus doesn't exist, it would return {}
       # which results in ES erroring out, when passed in
       next if value == {}
-      event.get(field.tr('.', '_')) = value
+      event.set(field.tr('.', '_'), value)
     end
   end # def fill_cloudflare_data
 

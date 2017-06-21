@@ -1,13 +1,13 @@
 Gem::Specification.new do |s|
   s.name = 'logstash-input-cloudflare'
-  s.version = '0.10.0'
+  s.version = '0.10.1'
   s.licenses = ['Apache License (2.0)']
   s.summary = 'This logstash input plugin fetches logs from Cloudflare using'\
               'their API'
   s.description = 'This gem is a logstash plugin required to be installed on'\
                   'top of the Logstash core pipeline using $LS_HOME/bin/plugin'\
                   ' install gemname. This gem is not a stand-alone program'
-  s.authors = ['Igor Serko','Sandeep Pandey','Alejandro Ferrari']
+  s.authors = ['Alejandro Ferrari']
   s.email = 'cdgraff@gmail.com'
   s.homepage = 'https://github.com/cdgraff/logstash-input-cloudflare/'
   s.require_paths = ['lib']
@@ -24,9 +24,9 @@ Gem::Specification.new do |s|
   s.metadata = { 'logstash_plugin' => 'true', 'logstash_group' => 'input' }
 
   # Gem dependencies
-  s.add_runtime_dependency 'logstash-core', '>= 2.0.0'
-  s.add_runtime_dependency 'logstash-codec-json', '>= 2.0.0'
-  s.add_development_dependency 'logstash-devutils', '>= 0.0.16'
-  s.add_development_dependency 'webmock', '>= 1.24.2', '< 1.25.0'
-  s.add_development_dependency 'rubocop', '>= 0.36.0', '< 0.40.0'
+  s.add_runtime_dependency 'logstash-core', '>= 5.4.0'
+  s.add_runtime_dependency 'logstash-codec-json', '>= 3.0.2'
+  s.add_development_dependency 'logstash-devutils', '>= 1.3.3'
+  s.add_development_dependency 'webmock', '>= 1.24.6'
+  s.add_development_dependency 'rubocop', '>= 0.39.0'
 end

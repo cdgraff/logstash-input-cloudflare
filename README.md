@@ -59,3 +59,20 @@ make
 
 Logstash will run in verbose mode, so you will see some messages coming through. In order to verify you're getting results you can open up your browser to http://&lt;IP&gt;:5601 and check Kibana.
 Value for the IP address is whatever `docker-machine ip default` says or if you use Docker For Mac ... it's just 127.0.0.1.
+
+## Compile from source code:
+[CompilationError] (https://stackoverflow.com/questions/29770821/could-not-find-gem-logstash-devutils-0-ruby-in-any-of-the-gem-sources)
+
+```
+rvm install jruby
+rvm use jruby
+gem install bundler
+bundle install
+```
+
+## Build GEM
+```
+bundle exec rspec
+gem build logstash-input-cloudflare.gemspec
+logstash-plugin install logstash-input-cloudflare-0.10.x.gem
+```
