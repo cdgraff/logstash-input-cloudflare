@@ -58,7 +58,7 @@ DEFAULT_FIELDS = [
   'clientRequest.httpHost', 'clientRequest.httpMethod', 'clientRequest.uri',
   'clientRequest.httpProtocol', 'clientRequest.userAgent',
   'edgeResponse.status', 'edgeResponse.bytes'
-].freeze
+]
 
 class LogStash::Inputs::Cloudflare < LogStash::Inputs::Base
   config_name 'cloudflare'
@@ -235,7 +235,7 @@ class LogStash::Inputs::Cloudflare < LogStash::Inputs::Base
       # in the case of cache.cacheStatus ... if cacheStatus doesn't exist, it would return {}
       # which results in ES erroring out, when passed in
       next if value == {}
-      event[field.tr('.', '_')] = value
+      event.get(field.tr('.', '_')) = value
     end
   end # def fill_cloudflare_data
 
