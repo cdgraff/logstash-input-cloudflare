@@ -1,3 +1,6 @@
+## 0.10.1
+- refactor to work with Logstash > 5.3.x (tested with 5.4.3)
+
 ## 0.9.11
 - added option to set open and read timeouts for API calls.
 

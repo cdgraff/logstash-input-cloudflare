@@ -1,23 +1,28 @@
-logstash:
-  image: logstash:2.4.0
-  links:
-    - elasticsearch:esserver
-  volumes:
-    - ./logstash.conf:/config/logstash.conf
-    - .:/logstash-input-cloudflare
-  command: logstash --pluginpath /logstash-input-cloudflare/lib/ -f /config/logstash.conf --verbose
+version: '3.1'
+services:
+  logstash:
+    image: logstash:5.4.2
+    links:
+      - elasticsearch:elasticsearch
+    volumes:
+      - ./logstash.conf:/config/logstash.conf
+      - .:/logstash-input-cloudflare
+    command: bash -c "logstash-plugin install /logstash-input-cloudflare/logstash-input-cloudflare-0.10.1.gem ; logstash -f /config/logstash.conf"
+    depends_on:
+      - "elasticsearch"
 
-kibana:
-  image: kibana:4.6.1
-  links:
-    - elasticsearch:esserver
-  environment:
-    - ELASTICSEARCH_URL=http://esserver:9200
-  ports:
-    - 5601:5601
+  kibana:
+    image: kibana:5.1.1
+    links:
+      - elasticsearch:elasticsearch
+    environment:
+      - ELASTICSEARCH_URL=http://elasticsearch:9200
+    ports:
+      - 5601:5601
+    depends_on:
+      - "elasticsearch"
 
-elasticsearch:
-  image: elasticsearch:2.4.1
-  command: bash -c "plugin install mobz/elasticsearch-head ; /docker-entrypoint.sh elasticsearch"
-  ports:
-    - 9200:9200
+  elasticsearch:
+    image: elasticsearch:5.1.1
+    ports:
+      - 9200:9200

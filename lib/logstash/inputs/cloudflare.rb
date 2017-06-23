@@ -295,7 +295,7 @@ class LogStash::Inputs::Cloudflare < LogStash::Inputs::Base
     entries.each do |entry|
       process_entry(queue, metadata, entry)
     end
-    @logger.info(metadata)
+    @logger.info("Metadata #{metadata}")
     continue_or_sleep(metadata)
     write_metadata(metadata)
   end # def loop_worker

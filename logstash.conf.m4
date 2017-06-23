@@ -6,7 +6,7 @@ input {
         type => "cloudflare_logs"
         poll_time => 15
         poll_interval => 120
-        metadata_filepath => "/logstash-input-cloudflare/cf_metadata.json"
+        metadata_filepath => "/tmp/cf_metadata.json"
         fields => [
           'timestamp', 'zoneId', 'ownerId', 'zoneName', 'rayId', 'securityLevel',
           'client.ip', 'client.country', 'client.sslProtocol', 'client.sslCipher',
@@ -21,7 +21,7 @@ input {
 }
 output {
     elasticsearch {
-        hosts => ["esserver:9200"]
+        hosts => ["elasticsearch:9200"]
         index => "logstash-%{+YYYY.MM.dd}"
         doc_as_upsert => true
         document_id => "%{rayId}"
@@ -29,23 +29,23 @@ output {
     }
 }
 filter {
- ruby {
-   code => "event['timestamp_ms'] = event['timestamp'] / 1_000_000"
-   remove_field => [ 'timestamp' ]
- }
- ruby {
-   code => "event['edge_requestTime'] = (event['edge_endTimestamp'] - event['edge_startTimestamp']).to_f / 1_000_000_000"
- }
- ruby {
-   code => "event['edgeResponse_headerBytes'] = event['edgeResponse_bytes'].to_i - event['edgeResponse_bodyBytes'].to_i"
- }
- date {
-   match => [ "timestamp_ms", "UNIX_MS" ]
- }
- geoip {
-   source => "client_ip"
- }
- useragent {
-   source => "clientRequest.userAgent"
- }
+    ruby {
+        code => "event.set('timestamp_ms', event.get('timestamp') / 1_000_000)"
+        remove_field => ['timestamp']
+    }
+    ruby {
+        code => "event.set('edge_requestTime', event.get('edge_endTimestamp') - event.get('edge_startTimestamp').to_f / 1_000_000_000)"
+    }
+    ruby {
+        code => "event.set('edgeResponse_headerBytes', event.get('edgeResponse_bytes').to_i - event.get('edgeResponse_bodyBytes').to_i)"
+    }
+    date {
+        match => ["timestamp_ms", "UNIX_MS"]
+    }
+    geoip {
+        source => "client_ip"
+    }
+    useragent {
+        source => "clientRequest.userAgent"
+    }
 }

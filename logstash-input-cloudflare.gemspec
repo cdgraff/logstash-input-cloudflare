@@ -5,11 +5,12 @@ Gem::Specification.new do |s|
   s.summary = 'This logstash input plugin fetches logs from Cloudflare using'\
               'their API'
   s.description = 'This gem is a logstash plugin required to be installed on'\
-                  'top of the Logstash core pipeline using $LS_HOME/bin/plugin'\
-                  ' install gemname. This gem is not a stand-alone program'
-  s.authors = ['Alejandro Ferrari']
-  s.email = 'cdgraff@gmail.com'
-  s.homepage = 'https://github.com/cdgraff/logstash-input-cloudflare/'
+                  'top of the Logstash core pipeline using $LS_HOME/bin/logstash-plugin'\
+                  ' install logstash-input-cloudflare-X.X.X.gem.' \
+                  ' This gem is not a stand-alone program'
+  s.authors = ['Igor Serko']
+  s.email = 'igor.serko@gmail.com'
+  s.homepage = 'https://github.com/iserko/logstash-input-cloudflare/'
   s.require_paths = ['lib']
 
   # Files
