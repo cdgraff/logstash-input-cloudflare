@@ -1,10 +1,10 @@
 CONTRIBUTORS
 ============================================
 
-* **[Alex Gorbatchev](https://github.com/alexgorbatchev)**
+* **[Igor Serko](https://github.com/iserko)**
 
   * Original version and maintainer
 
-* **[Alejandro Ferrari](https://github.com/cdgraff) and [Jose Sacredo](https://github.com/jsagredo-scott)**
+* **[Alejandro Ferrari](https://github.com/cdgraff) and [Jose Sagredo](https://github.com/jsagredo-scott)**
 
-  * Refactor for Logstash > v5.3.x
+  * Refactor for Logstash > 5.3.x
