@@ -1,6 +1,6 @@
 machine:
   ruby:
-    version: jruby-1.7.19
+    version: jruby-9.0.4.0
 
 test:
   post:
